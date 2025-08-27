@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Test Ride Booking</title>
+    <link rel="stylesheet" href="booking.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Car Test Ride Booking</h1>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="bookingId">Booking ID:</label>
+          <input
+            type="text"
+            id="bookingId"
+            name="bookingId"
+            placeholder="Enter Booking ID"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="carModel">Car Model:</label>
+          <input
+            type="text"
+            id="carModel"
+            name="carModel"
+            placeholder="Enter Car Model"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="startDate">Start Date:</label>
+          <input type="date" id="startDate" name="startDate" required />
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate" name="endDate" required />
+        </div>
+        <button type="submit" class="action-button">Book Test Ride</button>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("bookingForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          // const bookingId = document.getElementById("bookingId").value;
+          const username = document.getElementById("username").value;
+          const carModel = document.getElementById("carModel").value;
+          const startDate = document.getElementById("startDate").value;
+          const endDate = document.getElementById("endDate").value;
+
+          // Client-side validation
+          if (!bookingId || !username || !carModel || !startDate || !endDate) {
+            alert("All fields are required.");
+            return; // Stop the form submission
+          }
+
+          try {
+            const response = await fetch(
+              "http://localhost:3000/api/booktestride",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username,
+                  carModel,
+                  startDate,
+                  endDate,
+                }),
+              }
+            );
+
+            // Check if response is successful
+            if (!response.ok) {
+              const errorData = await response.json();
+              alert(`Error: ${errorData.message}`); // Handle any errors returned by the backend
+              return;
+            }
+
+            // If successful, parse the JSON response
+            const data = await response.json();
+
+            if (data.success) {
+              alert(data.message); // Booking success message
+            } else {
+              alert(`Error: ${data.message}`); // Error message from backend
+            }
+          } catch (error) {
+            console.error("Error during booking submission:", error);
+            alert(
+              "An error occurred while submitting the booking. Please try again later."
+            );
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="form.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Sign In</h1>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            id="email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            id="password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input type="checkbox" name="terms" id="terms" required />
+          <label for="terms">I agree to the Terms & Conditions</label>
+        </div>
+        <button type="submit" class="button">Sign In</button>
+        <div>
+          <p class="or-group">OR</p>
+          <a href="registerForm.html" class="button">Sign Up</a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Select the login form
+      const loginForm = document.getElementById("loginForm");
+
+      // Add an event listener for form submission
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Prevent the form from reloading the page
+
+        // Extract form data
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        // Validate terms agreement
+        const termsChecked = document.getElementById("terms").checked;
+        if (!termsChecked) {
+          alert("Please agree to the Terms & Conditions.");
+          return;
+        }
+
+        try {
+          // Call the API
+          const response = await fetch("http://localhost:3000/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            // Successful login
+            alert("Login successful!");
+            window.location.href = "index.html"; // Redirect to the home page
+          } else {
+            // Handle errors
+            alert(result.message || "Login failed. Please try again.");
+          }
+        } catch (error) {
+          // Handle network or other errors
+          console.error("Error during login:", error);
+          alert("An error occurred. Please try again later.");
+        }
+      });
+    </script>
+  </body>
+</html>

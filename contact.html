@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services</title>
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body>
+    <section id="home" class="sect">
+      <h1>Our Services</h1>
+      <p>Your satisfaction is our priority.</p>
+    </section>
+
+    <section id="services" class="services">
+      <div class="service-cards">
+        <div class="card">
+          <h3>Car Sales</h3>
+          <img src="sale.png" alt="Car Sales" />
+          <p>We offer a wide range of new and pre-owned vehicles.</p>
+        </div>
+        <div class="card">
+          <h3>Car Maintenance</h3>
+          <img src="maintenncs.png" alt="Car Maintenance" />
+          <p>Top-notch maintenance services for all car models.</p>
+        </div>
+        <div class="card">
+          <h3>Financing</h3>
+          <img src="finanan.png" alt="Financing" />
+          <p>Flexible financing options to suit your budget.</p>
+        </div>
+        <div class="card">
+          <h3>Spare Parts</h3>
+          <img src="spare.png" alt="Spare Parts" />
+          <p>High-quality spare parts to keep your car running smoothly.</p>
+        </div>
+        <div class="card">
+          <h3>Oil Change</h3>
+          <img src="oil.png" alt="Oil Change" />
+          <p>
+            Keep your engine running smoothly with our quick and efficient oil
+            change service.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Tyre Service</h3>
+          <img src="tyre.png" alt="Tyre Service" />
+          <p>
+            Comprehensive tyre services including fitting, balancing, and
+            rotation for all vehicle types.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <div class="form1">
+          <label for="Name">Name</label>
+          <input
+            type="text"
+            id="Name"
+            placeholder="Enter Name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form1">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="form1">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your Email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="form1">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Enter your Message"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const Name = document.getElementById("Name").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const message = document.getElementById("message").value.trim();
+
+          // Client-side validation
+          if (!Name || !password || !email || !message) {
+            alert("All fields are required.");
+            return;
+          }
+
+          try {
+            const response = await fetch("http://localhost:3000/api/service", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                Name,
+                password,
+                email,
+                message,
+              }),
+            });
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              alert(`Error: ${errorData.message}`);
+              return;
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+              alert(data.message);
+              document.getElementById("contactForm").reset();
+            } else {
+              alert(`Error: ${data.message}`);
+            }
+          } catch (error) {
+            console.error("Error during form submission:", error);
+            alert(
+              "An error occurred while submitting the form. Please try again later."
+            );
+          }
+        });
+    </script>
+  </body>
+</html>

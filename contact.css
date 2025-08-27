@@ -1,0 +1,151 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #121212;
+}
+
+/* Header */
+
+/* sect Section */
+.sect {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #1e1e1e;
+}
+
+.sect h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.sect p {
+  font-size: 24px;
+}
+
+/* Services Section */
+.services {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #252525;
+}
+
+.service-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+img {
+  width: 260px;
+  height: 220px;
+  border-radius: 54%;
+}
+
+.card {
+  background-color: #ab0505;
+  margin: 10px;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+.card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  font-weight: 500px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Contact Section */
+.contact {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #252525;
+}
+
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+.contact form {
+  max-width: 550px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form1 {
+  margin-bottom: 20px;
+}
+
+.form1 label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form1 input,
+.form1 textarea:hover {
+  border: purple;
+}
+
+.form1 input,
+.form1 textarea {
+  width: 100%;
+  padding: 20px;
+  border: none;
+  border-radius: 30px;
+  background-color: #333333;
+  color: #ffffff;
+  transition: 0.2s ease-in-out;
+}
+
+.form1 input:focus,
+.form1 textarea:focus {
+  outline: none;
+  border: 1px solid #ffa500;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: #ffa500;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff8c00;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #1e1e1e;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .service-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+}

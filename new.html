@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars</title>
+
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!---Link Aos Animation ---> 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Search Bar Styling */
+        .search-bar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .search-bar input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .boxcont {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            transition: background-color 0.3s;
+            opacity: 1;
+            display: block;
+        }
+
+        .boxcont.highlight {
+            background-color: #f0f8ff;
+            animation: highlight 0.5s ease-in-out;
+        }
+
+        @keyframes highlight {
+            0% { background-color: #f0f8ff; }
+            100% { background-color: transparent; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <img src="img/car-logo.png" class="logo" alt="">
+            <div class="menu">
+                <input type="text" class="search-bar" id="searchInput" placeholder="Search for a car..." oninput="searchCar()" />
+                <a href="#">Home</a>
+                <a href="#exp">Explore Cars</a>
+                <a href="#features">Features</a>
+                <a href="contact.html">Services</a>
+                <a href="admin-dashboard.html">Dashboard</a>
+            </div>
+
+            <div> 
+                <a href="registerForm.html" class="btn">Sign-up/login</a>
+            </div>
+
+            <div class="social">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="text" data-aos="fade-right" data-aos-delay="1000">
+            <h4 class="h40">Powerful, Fun and</h4>
+            <h1 class="h10">Fierce to <br> <span>Drive</span></h1>
+            <p class="p1">Real Poise, Real Power, Real Performance.</p>
+            <a href="#" class="btn">book a test ride</a>
+        </div>
+    </div>
+
+    <section id="exp">
+        <div class="tainer">
+            <div class="heading">Explore cars</div>
+            <div class="container2" data-aos="fade-up" data-aos-delay="400">
+                <div class="boxcont" data-name="Royals Royce">
+                    <h1>Royals Royce</h1>
+                    <img src="img/car1.png" alt="" class="img2">
+                    <p>Royals Royce dolor sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="roolsroyce.html" class="btn2">Order Now!</a>
+                </div>
+                <div class="boxcont" data-name="Honda Vessel">
+                    <h1>Honda Vessel</h1>
+                    <img src="img/pngegg.png" alt="" class="img2">
+                    <p>Honda Vessel dolor sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="vessel.html" class="btn2">Purchase</a>
+                </div>
+                <div class="boxcont" data-name="Audi R8">
+                    <h1>Audi R8</h1>
+                    <img src="img/audi.png" alt="" class="img2">
+                    <p>Audi E-trone Gt dolor sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="audi.html" class="btn2">Purchase</a>
+                </div>
+                <div class="boxcont" data-name="BMW">
+                    <h1>BMW</h1>
+                    <img src="img/bmw.png" alt="" class="img2">
+                    <p>BMW latest model sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="bmw.html" class="btn2">Purchase</a>
+                </div>
+                <div class="boxcont" data-name="Mercedes">
+                    <h1>Mercedes</h1>
+                    <img src="img/mer.png" alt="" class="img2">
+                    <p>Mercedes dolor sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="mercedes.html" class="btn2">Purchase</a>
+                </div>
+                <div class="boxcont" data-name="Fortuner">
+                    <h1>Fortuner</h1>
+                    <img src="img/fortuner-19139.png" alt="" class="img2">
+                    <p>Toyota Revo dolor sit amet consectetur adipisicing elit. Accusamus, illum?</p>
+                    <a href="fortuner.html" class="btn2">Purchase</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container3" id="features">
+        <div class="heading2">Explore Res</div>
+        <div class="container6">
+            <div class="container5">
+                <div class="text" data-aos="fade-right" data-aos-delay="1000">
+                    <h5>Buy the best</h5>
+                    <h1>Quality <br> <span>Cars</span></h1>
+                    <p>Real Poise, Real Power, Real Performance.</p>
+                    <a href="#" class="btn">Place Order!</a>
+                </div>
+            </div>
+
+            <div class="container4" data-aos="fade-left" data-aos-delay="1000">
+                <div class="wrapper">
+                    <img src="img/ferari.png" alt="Reload">
+                    <img src="img/tesla.png" alt="">
+                    <img src="img/yellow.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let heroBg = document.querySelector('.hero');
+        setInterval(() => {
+            heroBg.style.backgroundImage = "url(img/bg-light.jpg)";
+            setTimeout(() => {
+                heroBg.style.backgroundImage = "url(img/bg.jpg)";
+            }, 1000);
+        }, 2200);
+
+        function searchCar() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const carCards = document.querySelectorAll('.boxcont');
+
+            carCards.forEach(card => {
+                const carName = card.getAttribute('data-name').toLowerCase();
+                if (carName.includes(input)) {
+                    card.classList.add('highlight');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    card.classList.remove('highlight');
+                }
+            });
+        }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

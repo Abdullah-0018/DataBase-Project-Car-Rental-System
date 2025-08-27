@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <img src="img/car-logo.png" alt="Car Rental Logo" />
+        <h1>Admin Dashboard</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#users">Manage Users</a></li>
+          <li><a href="#cars">Manage Cars</a></li>
+          <li><a href="#bookings">Manage Bookings</a></li>
+          <li><a href="index.html">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <section id="users" class="dashboard-section">
+        <h2>Manage Users</h2>
+        <p class="para">
+          View and manage user accounts. Block, delete, or modify user details.
+        </p>
+        <div>
+          <button onclick="getUsers()">Refresh User List</button>
+        </div>
+        <ul id="userList"></ul>
+
+        <!-- Update Form -->
+        <div id="updateForm" style="display: none; margin-top: 20px">
+          <h3>Update User</h3>
+          <input type="hidden" id="updateId" />
+          <input
+            type="text"
+            id="updateUsername"
+            placeholder="Username"
+            required
+          />
+          <input type="email" id="updateEmail" placeholder="Email" required />
+          <input
+            type="password"
+            id="updatePassword"
+            placeholder="New Password (Leave blank to keep current)"
+          />
+          <button onclick="updateUser()">Update User</button>
+        </div>
+      </section>
+
+      <!-- <section id="cars" class="dashboard-section">
+        <h2>Manage Cars</h2>
+        <p class="para">
+          Add, edit, or remove cars from the inventory. Update car availability
+          and pricing.
+        </p>
+        <button onclick="manageCars()">View Cars</button>
+      </section> -->
+
+      <!-- <section id="bookings" class="dashboard-section">
+        <h2>Manage Bookings</h2>
+        <p class="para">
+          View and manage all bookings. Confirm, cancel, or update bookings as
+          needed.
+        </p>
+        <div>
+          <button onclick="getBookings()">Refresh Booking List</button>
+        </div>
+        <ul id="bookingList"></ul>
+      </section> -->
+    </main>
+
+    <script>
+      // JavaScript for User Management
+      async function getUsers() {
+        const response = await fetch("http://localhost:3000/api/users");
+        const users = await response.json();
+        const userList = document.getElementById("userList");
+        userList.innerHTML = "";
+        users.forEach((user) => {
+          userList.innerHTML += `
+                    <li>
+                     UserName: ${user.username}   - Email: ${user.email}   - Password: ${user.password}
+                      <button onclick="deleteUser(${user.id})" style="margin-bottom: 18px">Delete</button>
+                      <button onclick="showUpdateForm(${user.id}, '${user.username}', '${user.email}', '${user.password}')">Update</button>
+                    </li>
+                  `;
+        });
+      }
+
+      async function deleteUser(id) {
+        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+          method: "DELETE",
+        });
+        const data = await response.json();
+        alert(data.message);
+        getUsers();
+      }
+
+      function showUpdateForm(id, username, email, password) {
+        document.getElementById("updateForm").style.display = "block";
+        document.getElementById("updateId").value = id;
+        document.getElementById("updateUsername").value = username;
+        document.getElementById("updateEmail").value = email;
+        document.getElementById("updatePassword").value = ""; // Leave password field empty
+      }
+
+      async function updateUser() {
+        const id = document.getElementById("updateId").value;
+        const username = document.getElementById("updateUsername").value;
+        const email = document.getElementById("updateEmail").value;
+        const password = document.getElementById("updatePassword").value;
+
+        // Only send password if it's provided, otherwise, it will be excluded
+        const updateData = { username, email };
+        if (password) {
+          updateData.password = password;
+        }
+
+        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateData),
+        });
+        const data = await response.json();
+        alert(data.message);
+        getUsers();
+        document.getElementById("updateForm").style.display = "none";
+      }
+
+      function manageCars() {
+        alert("Managing Cars...");
+      }
+      //
+
+      window.onload = getBookings;
+    </script>
+  </body>
+</html>
