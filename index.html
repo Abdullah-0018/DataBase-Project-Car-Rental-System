@@ -2,239 +2,235 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cars</title>
-
-    <!-- Link Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
-    <!-- Link File CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <!---Link Aos Animation --->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
+    <title>User Registration</title>
     <style>
-      /* Search Bar Styling */
-      .search-bar {
-        position: sticky;
-        top: 0;
-        background: white;
-        padding: 10px;
-        padding-left: 14px;
-        border-radius: 25px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 10;
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
       }
 
-      .search-bar input {
-        width: 70%;
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 15px;
-        border: 1px solid #ccc;
-      }
-
-      /* Style for No Results Message */
-      #noResultsMessage {
-        display: none;
-        color: red;
-        text-align: center;
+      h1 {
         margin-top: 20px;
+        font-size: 32px;
+        color: #333;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 24px;
+        color: #444;
+      }
+
+      input {
+        padding: 10px;
+        margin: 10px;
+        font-size: 16px;
+        width: 300px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #userList {
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+        width: 60%;
+      }
+
+      #userList li {
+        background-color: #fff;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #userList li button {
+        background-color: #f44336;
+        margin-left: 10px;
+      }
+
+      #userList li button:hover {
+        background-color: #d32f2f;
+      }
+
+      #updateForm {
+        margin-top: 30px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 350px;
+      }
+
+      #updateForm input {
+        width: 100%;
+      }
+
+      #updateForm button {
+        background-color: #28a745;
+      }
+
+      #updateForm button:hover {
+        background-color: #218838;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 500px;
       }
     </style>
   </head>
-
   <body>
-    <header>
-      <nav>
-        <img src="img/car-logo.png" class="logo" alt="" />
-        <div class="menu">
-          <input
-            type="text"
-            class="search-bar"
-            id="searchInput"
-            placeholder="Search for a car..."
-            oninput="searchCar()"
-          />
+    <div class="container">
+      <h1>User Registration</h1>
 
-          <a href="#">Home</a>
-          <a href="#exp">Explore Cars</a>
-          <a href="#features">Features</a>
-          <a href="contact.html">Services</a>
-          <a href="admin-dashboard.html">Dashboard</a>
-        </div>
+      <!-- User Add Form -->
+      <div class="form-container">
+        <h2>Add User</h2>
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button onclick="addUser()">Add User</button>
+      </div>
 
-        <div>
-          <a href="registerForm.html" class="btn">Sign-up/login</a>
-        </div>
+      <h2>Users List</h2>
+      <ul id="userList"></ul>
 
-        <div class="social">
-          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#"><i class="fa-brands fa-twitter"></i></a>
-          <a href=""><i class="fa-brands fa-instagram"></i></a>
-        </div>
-      </nav>
-    </header>
-
-    <!-- Search Bar -->
-
-    <div class="hero">
-      <div class="text" data-aos="fade-right" data-aos-delay="1000">
-        <h4 class="h40">Powerful, Fun and</h4>
-        <h1 class="h10">
-          Fierce to <br />
-          <span>Drive</span>
-        </h1>
-        <p class="p1">Real Poise, Real Power, Real Perfomance.</p>
-        <a href="booking.html" class="btn">book a test ride</a>
+      <!-- Update User Form -->
+      <div id="updateForm" style="display: none">
+        <h2>Update User</h2>
+        <input type="hidden" id="updateId" />
+        <input
+          type="text"
+          id="updateUsername"
+          placeholder="Username"
+          required
+        />
+        <input type="email" id="updateEmail" placeholder="Email" required />
+        <input type="password" id="updatePassword" placeholder="New Password" />
+        <button onclick="updateUser()">Update User</button>
       </div>
     </div>
 
-    <section id="exp">
-      <div class="tainer">
-        <div class="heading">Explore cars</div>
-        <div class="container2" data-aos="fade-up" data-aos-delay="400">
-          <div class="boxcont" data-name="Royals Royce">
-            <h1>Royals Royce</h1>
-            <img src="img/car1.png" alt="" class="img2" />
-            <p>
-              Royals Royce dolor sit amet consectetur adipisicing elit.
-              Accusamus, illum?
-            </p>
-            <a href="roolsroyce.html" class="btn2">Order Now!</a>
-          </div>
-          <div class="boxcont" data-name="Honda Vessel">
-            <h1>Honda Vessel</h1>
-            <img src="img/pngegg.png" alt="" class="img2" />
-            <p>
-              Honda Vessel dolor sit amet consectetur adipisicing elit.
-              Accusamus, illum?
-            </p>
-            <a href="vessel.html" class="btn2">Purchase</a>
-          </div>
-          <div class="boxcont" data-name="Audi R8">
-            <h1>Audi R8</h1>
-            <img src="img/audi.png" alt="" class="img2" />
-            <p>
-              Audi E-trone Gt dolor sit amet consectetur adipisicing elit.
-              Accusamus, illum?
-            </p>
-            <a href="audi.html" class="btn2">Purchase</a>
-          </div>
-          <div class="boxcont" data-name="BMW">
-            <h1>BMW</h1>
-            <img src="img/bmw.png" alt="" class="img2" />
-            <p>
-              BMW latest model sit amet consectetur adipisicing elit. Accusamus,
-              illum?
-            </p>
-            <a href="bmw.html" class="btn2">Purchase</a>
-          </div>
-          <div class="boxcont" data-name="Mercedes">
-            <h1>Mercedes</h1>
-            <img src="img/mer.png" alt="" class="img2" />
-            <p>
-              Mercedes dolor sit amet consectetur adipisicing elit. Accusamus,
-              illum?
-            </p>
-            <a href="mercedes.html" class="btn2">Purchase</a>
-          </div>
-          <div class="boxcont" data-name="Fortuner">
-            <h1>Fortuner</h1>
-            <img src="img/fortuner-19139.png" alt="" class="img2" />
-            <p>
-              Toyota Revo dolor sit amet consectetur adipisicing elit.
-              Accusamus, illum?
-            </p>
-            <a href="fortuner.html" class="btn2">Purchase</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="container3" id="features">
-      <div class="heading2">Explore res</div>
-      <div class="container6">
-        <div class="container5">
-          <div class="text" data-aos="fade-right" data-aos-delay="1000">
-            <h5>Buy the best</h5>
-            <h1>
-              Quality <br />
-              <span>Cars</span>
-            </h1>
-            <p>Real Poise, Real Power, Real Perfomance.</p>
-            <a href="#" class="btn">Place Order!</a>
-          </div>
-        </div>
-
-        <div class="container4" data-aos="fade-left" data-aos-delay="1000">
-          <div class="wrapper">
-            <img src="img/ferari.png" alt="Reload" />
-            <img src="img/tesla.png" alt="" />
-            <img src="img/yellow.png" alt="" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <p
-      id="noResultsMessage"
-      style="display: none; color: red; text-align: center"
-    >
-      No cars found.
-    </p>
-
     <script>
-      let heroBg = document.querySelector(".hero");
-      setInterval(() => {
-        heroBg.style.backgroundImage = "url(img/bg-light.jpg)";
-        setTimeout(() => {
-          heroBg.style.backgroundImage = "url(img/bg.jpg)";
-        }, 1000);
-      }, 2200);
-      function searchCar() {
-        const input = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        const carCards = document.querySelectorAll(".boxcont");
-        let found = false; // Flag to check if any car matches the search
+      // Add User
+      async function addUser() {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-        // Hide all the car cards initially
-        carCards.forEach((card) => {
-          card.style.display = "none";
+        const response = await fetch("http://localhost:3000/api/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
         });
 
-        carCards.forEach((card) => {
-          const carName = card.getAttribute("data-name").toLowerCase();
-          if (carName.includes(input)) {
-            card.style.display = "block"; // Show the matching car
-            found = true;
-
-            // Scroll to the matching car card
-            card.scrollIntoView({
-              behavior: "smooth", // Smooth scroll effect
-              block: "center", // Scroll to the center of the page
-            });
-          }
-        });
-
-        // Show "No results found" message if no cars match
-        const noResultsMessage = document.getElementById("noResultsMessage");
-        if (!found) {
-          noResultsMessage.style.display = "block";
-        } else {
-          noResultsMessage.style.display = "none";
-        }
+        const data = await response.json();
+        alert(data.message);
+        getUsers(); // Refresh users list
       }
-    </script>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
+      // Get Users
+      async function getUsers() {
+        const response = await fetch("http://localhost:3000/api/users");
+        const users = await response.json();
+        const userList = document.getElementById("userList");
+        userList.innerHTML = "";
+        users.forEach((user) => {
+          userList.innerHTML += `
+          <li>${user.username} - ${user.email}
+            <button onclick="deleteUser(${user.id})">Delete</button>
+            <button onclick="showUpdateForm(${user.id}, '${user.username}', '${user.email}')">Update</button>
+          </li>
+        `;
+        });
+      }
+
+      // Delete User
+      async function deleteUser(id) {
+        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+          method: "DELETE",
+        });
+
+        const data = await response.json();
+        alert(data.message);
+        getUsers(); // Refresh users list
+      }
+
+      // Show Update Form
+      function showUpdateForm(id, username, email) {
+        document.getElementById("updateForm").style.display = "block";
+        document.getElementById("updateId").value = id;
+        document.getElementById("updateUsername").value = username;
+        document.getElementById("updateEmail").value = email;
+      }
+
+      // Update User
+      async function updateUser() {
+        const id = document.getElementById("updateId").value;
+        const username = document.getElementById("updateUsername").value;
+        const email = document.getElementById("updateEmail").value;
+        const password = document.getElementById("updatePassword").value;
+
+        const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+        alert(data.message);
+        getUsers(); // Refresh users list
+        document.getElementById("updateForm").style.display = "none";
+      }
+
+      // Initialize by fetching all users
+      window.onload = getUsers;
     </script>
   </body>
 </html>
